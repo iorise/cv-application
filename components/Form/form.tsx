@@ -1,17 +1,25 @@
-import { Info, Contact } from "@/components/Form/Components/index";
-import type { CVData } from "@/types";
+import { Info, Contact, Education } from "@/components/Form/Components/index";
+import type { CVData, EducationType } from "@/types";
 
 type FormInputProps = {
   info: CVData["info"];
   contact: CVData["contact"];
-  onChange: (name: string, value: string, section: "info" | "contact") => void;
+  education: EducationType;
+  onChange: (
+    name: string,
+    value: string,
+    section: "info" | "contact" | "education",
+    index?: number,
+    field?: keyof EducationType
+  ) => void;
 };
 
-const FormInput = ({ info, contact, onChange }: FormInputProps) => {
+const FormInput = ({ onChange, info, contact, education }: FormInputProps) => {
   return (
     <>
       <Info info={info} onChange={onChange} />
       <Contact contact={contact} onChange={onChange} />
+      <Education education={education} onChange={onChange} />
     </>
   );
 };

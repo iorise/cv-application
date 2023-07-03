@@ -11,28 +11,28 @@ export type CVData = {
       address: string;
       phone: string;
     };
-    education: Education[];
-    experience: Experience[];
-    skills: Skill[];
+    education: EducationType[]
+    experience: ExperienceType[];
+    skills: SkillType[];
   };
-  
- export type Education = {
-    degree: string;
-    university: string;
-    from: string;
-    to: string;
-  };
-  
- export type Experience = {
-    title: string;
-    company: string;
-    from: string;
-    to: string;
-    description: string;
-  };
-  
-export  type Skill = {
-    skill: string;
-    key: number;
-  };
+  export type EducationType = {
+     degree: string;
+     university: string;
+     from: string;
+     to: string;
+   };
+   
+  export type ExperienceType = {
+     title: string;
+     company: string;
+     from: string;
+     to: string;
+     description: string;
+   };
+   
+ export  type SkillType = {
+     skill: string;
+     key: number;
+   };
+   
   
