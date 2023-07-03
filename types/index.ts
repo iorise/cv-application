@@ -15,13 +15,6 @@ export type CVData = {
     experience: Experience[];
     skills: Skill[];
   };
-
-  export type InfoData = {
-        firstName: string;
-        lastName: string;
-        profession: string;
-        profile: string;
-  }
   
  export type Education = {
     degree: string;

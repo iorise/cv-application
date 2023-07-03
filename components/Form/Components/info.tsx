@@ -5,22 +5,20 @@ import {
   CardHeader,
   CardTitle,
   CardContent,
-  CardDescription,
-  CardFooter,
 } from "@/components/ui/card";
-import type { InfoData } from "@/types";
+import type { CVData } from "@/types";
 import { Textarea } from "@/components/ui/textarea";
 
 type InfoProps = {
-  info: InfoData;
-  onChange: (name: string, value: string) => void;
+  info: CVData["info"];
+  onChange: (name: string, value: string, section: "info") => void;
 };
 
 const Info = ({ info, onChange }: InfoProps) => {
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     event.persist();
     const { name, value } = event.target;
-    onChange(name as keyof InfoData, value);
+    onChange(name as keyof CVData, value, "info");
   };
 
   return (
@@ -46,7 +44,6 @@ const Info = ({ info, onChange }: InfoProps) => {
                   value={info.lastName}
                   onChange={handleInputChange}
                   name="lastName"
-                  id="lastName"
                 />
               </div>
               <Input
@@ -60,7 +57,7 @@ const Info = ({ info, onChange }: InfoProps) => {
                 className="h-[100px] resize-none"
                 placeholder="Profile"
                 value={info.profile}
-                onChange={(e) => onChange("profile", e.target.value)}
+                onChange={(e) => onChange("profile", e.target.value, "info")}
                 name="profile"
               />
             </div>
