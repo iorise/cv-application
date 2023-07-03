@@ -9,24 +9,29 @@ import FormInput from "@/components/Form/form";
 const Home = () => {
   const [cv, setCv] = useState<CVData>(DefaultData);
 
-  const handleCvChange = (name: string, value: string) => {
+  const handleCvChange = (
+    name: string,
+    value: string,
+    section: "info" | "contact"
+  ) => {
     setCv((prevState) => ({
       ...prevState,
-      info: {
-        ...prevState.info,
-        [name]: value,
-      },
-      contact: {
-        ...prevState.contact,
+      [section]: {
+        ...prevState[section],
         [name]: value,
       },
     }));
   };
-  console.log(cv.info);
+
+  console.log(cv);
   return (
     <div>
       <Header />
-      <FormInput info={cv.info} onChange={handleCvChange} />
+      <FormInput
+        info={cv.info}
+        contact={cv.contact}
+        onChange={handleCvChange}
+      />
     </div>
   );
 };
