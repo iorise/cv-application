@@ -1,25 +1,33 @@
 import { Info, Contact, Education } from "@/components/Form/Components/index";
-import type { CVData, EducationType } from "@/types";
+import type { CVData, EducationType, ExperienceType } from "@/types";
+import Experience from "./Components/experience";
+
 
 type FormInputProps = {
   info: CVData["info"];
   contact: CVData["contact"];
-  education: EducationType;
+  education: EducationType[];
+  experience: ExperienceType[]
   onChange: (
     name: string,
     value: string,
-    section: "info" | "contact" | "education",
+    section: keyof CVData,
     index?: number,
-    field?: keyof EducationType
+    field?: keyof EducationType | keyof ExperienceType
   ) => void;
 };
 
-const FormInput = ({ onChange, info, contact, education }: FormInputProps) => {
+const FormInput = ({ onChange, info, contact, education, experience }: FormInputProps) => {
   return (
     <>
       <Info info={info} onChange={onChange} />
       <Contact contact={contact} onChange={onChange} />
-      <Education education={education} onChange={onChange} />
+      {education.map((edu, index) => (
+        <Education key={index} education={edu} onChange={onChange} />
+      ))}
+      {experience.map((exp, index) => (
+        <Experience key={index} experience={exp} onChange={onChange} />
+      ))}
     </>
   );
 };

@@ -1,10 +1,10 @@
 "use client";
 
-import React, { useState } from "react";
 import Header from "@/components/Header";
 import { DefaultData } from "@/lib/utils/default-data";
-import type { CVData, EducationType } from "@/types";
+import type { CVData, EducationType, ExperienceType } from "@/types";
 import FormInput from "@/components/Form/form";
+import React, { useState } from "react";
 
 const Home = () => {
   const [cv, setCv] = useState<CVData>(DefaultData);
@@ -12,38 +12,48 @@ const Home = () => {
   const handleCvChange = (
     name: string,
     value: string,
-    section: "info" | "contact" | "education",
+    section: keyof CVData,
     index?: number,
-    field?: keyof EducationType
+    field?: keyof EducationType | keyof ExperienceType
   ) => {
     setCv((prevState) => {
-      if (
-        section == "education" &&
-        index !== undefined &&
-        field !== undefined
-      ) {
-        const updatedEducation = prevState.education.map((edu, i) => {
-          if (i == index) {
-            return {
-              ...edu,
-              [field]: value,
-            };
-          }
-          return edu;
-        });
-        return {
-          ...prevState,
-          [section]: updatedEducation,
-        };
-      } else {
-        return {
-          ...prevState,
-          [section]: {
-            ...prevState[section],
-            [name]: value
-          }
+      if (section === "education") {
+        const updatedEducation = [...prevState.education];
+        if (index !== undefined && field !== undefined) {
+          updatedEducation[index] = {
+            ...updatedEducation[index],
+            [field]: value,
+          };
+        } else {
+          updatedEducation.push(DefaultData.education[0]);
         }
+        return {
+          ...prevState,
+          education: updatedEducation,
+        };
       }
+      if (section === "experience") {
+        const updatedExperience = [...prevState.experience];
+        if (index !== undefined && field !== undefined) {
+          updatedExperience[index] = {
+            ...updatedExperience[index],
+            [field]: value,
+          };
+        } else {
+          updatedExperience.push(DefaultData.experience[0]);
+        }
+        return {
+          ...prevState,
+          experience: updatedExperience,
+        };
+      }
+      return {
+        ...prevState,
+        [section]: {
+          ...prevState[section],
+          [name]: value,
+        },
+      };
     });
   };
 
@@ -52,11 +62,12 @@ const Home = () => {
     <div>
       <Header />
       <FormInput
+        onChange={handleCvChange}
         info={cv.info}
         contact={cv.contact}
-        education={cv.education[0]}
-        onChange={handleCvChange}
-      />
+        education={cv.education}
+        experience={cv.experience}
+        />
     </div>
   );
 };
