@@ -1,16 +1,18 @@
-import Info from "./Components/info";
-import type { InfoData } from "@/types";
+import { Info, Contact } from "@/components/Form/Components/index";
+import type { CVData } from "@/types";
 
 type FormInputProps = {
-  info: InfoData
-  onChange: (name: string, value: string) => void;
+  info: CVData["info"];
+  contact: CVData["contact"];
+  onChange: (name: string, value: string, section: "info" | "contact") => void;
 };
 
-const FormInput = ({info, onChange}: FormInputProps) => {
+const FormInput = ({ info, contact, onChange }: FormInputProps) => {
   return (
-    <div>
-      <div><Info info={info} onChange={onChange}/></div>
-    </div>
+    <>
+      <Info info={info} onChange={onChange} />
+      <Contact contact={contact} onChange={onChange} />
+    </>
   );
 };
 
