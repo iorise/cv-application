@@ -1,13 +1,13 @@
 "use client";
 
 import Header from "@/components/Header";
-import { DefaultData } from "@/lib/utils/default-data";
-import type { CVData, EducationType, ExperienceType } from "@/types";
 import FormInput from "@/components/Form/form";
-import React, { useState } from "react";
-import ModeToggle from "@/components/toggle-theme";
-import { ExampleData } from "@/lib/utils/example-data";
 import Preview from "@/components/Preview/preview";
+import ModeToggle from "@/components/toggle-theme";
+import React, { useState } from "react";
+import type { CVData, EducationType, ExperienceType } from "@/types";
+import { DefaultData } from "@/lib/utils/default-data";
+import { ExampleData } from "@/lib/utils/example-data";
 
 const Home = () => {
   const [cv, setCv] = useState<CVData>(DefaultData);
