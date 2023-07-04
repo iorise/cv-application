@@ -5,7 +5,11 @@ import { BiPencil } from "react-icons/bi";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
-const Header = () => {
+type HeaderProps = {
+  handleAutoFill: () => void
+}
+
+const Header = ({handleAutoFill}: HeaderProps) => {
   return (
     <div className="w-full items-center flex justify-center md:justify-start p-5">
       <Card className="md:w-[50%] w-[90%] h-[150px]">
@@ -16,7 +20,7 @@ const Header = () => {
             </CardTitle>
             <CardTitle>
               <Link href="https://github.com/iorise" target="_blank">
-                <Button>
+                <Button className="bg-white hover:bg-white/90">
                   <AiFillGithub size={25} />
                 </Button>
               </Link>
@@ -29,9 +33,9 @@ const Header = () => {
               <AiFillSave />
               Save
             </Button>
-            <Button>
+            <Button onClick={handleAutoFill}>
               <BiPencil />
-              Autofil
+              Autofill
             </Button>
           </div>
         </CardContent>
