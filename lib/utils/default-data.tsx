@@ -1,45 +1,47 @@
-export const DefaultData = {
-    info: {
-      firstName: '',
-      lastName: '',
-      profession: '',
-      profile: ''
+import { CVData } from "@/types";
+
+export const DefaultData: CVData = {
+  info: {
+    firstName: "",
+    lastName: "",
+    profession: "",
+    profile: "",
+  },
+  contact: {
+    website: "",
+    email: "",
+    address: "",
+    phone: "",
+  },
+  education: [
+    {
+      degree: "",
+      university: "",
+      from: "",
+      to: "",
     },
-    contact: {
-      website: '',
-      email: '',
-      address: '',
-      phone: ''
+  ],
+  experience: [
+    {
+      title: "",
+      company: "",
+      from: "",
+      to: "",
+      description: "",
     },
-    education: [
-      {
-        degree: '',
-        university: '',
-        from: '',
-        to: ''
-      }
-    ],
-    experience: [
-      {
-        title: '',
-        company: '',
-        from: '',
-        to: '',
-        description: ''
-      }
-    ],
-    skills: [
-      {
-        skill: '',
-        key: 0,
-      },
-      {
-        skill: '',
-        key: 1,
-      },
-      {
-        skill: '',
-        key: 2,
-      }
-    ]
-  };
+  ],
+  skills: [
+    {
+      skill: "",
+      key: 0,
+    },
+    {
+      skill: "",
+      key: 1,
+    },
+    {
+      skill: "",
+      key: 2,
+    },
+  ],
+};
