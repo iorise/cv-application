@@ -1,0 +1,36 @@
+.wrapper {
+  width: 700px;
+  height: 900px;
+  background-color: white;
+  color: black;
+}
+
+.header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 120px;
+  width: 100%;
+}
+
+.headerText {
+  font-size: 50px;
+  font-weight: 500;
+  letter-spacing: 1rem;
+  text-transform: uppercase;
+}
+
+.headerTextLast {
+    font-size: 50px;
+    font-weight: 300;
+    letter-spacing: 1rem;
+    text-transform: uppercase;
+  }
+
+@media screen and (max-width: 768px) {
+  .wrapper {
+    width: 500px;
+  }
+}
+
+/* scroll-m-20 text-[50px] font-bold tracking-[1rem] lg:text-5xl uppercase break-words */
