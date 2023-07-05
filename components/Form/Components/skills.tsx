@@ -37,7 +37,7 @@ const Skills = ({
           </CardTitle>
         </div>
       </CardHeader>
-      <div className="gap-1 flex flex-col overflow-y-scroll h-[200px] max-h-full">
+      <div className="gap-1 flex flex-col overflow-y-scroll h-[270px] max-h-full">
         <CardContent>
           <div className="flex flex-col gap-2">
             {itemSkill.map((skill, index) => {
