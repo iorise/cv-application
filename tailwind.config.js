@@ -8,6 +8,9 @@ module.exports = {
     "./src/**/*.{ts,tsx}",
   ],
   theme: {
+    fontFamily: {
+      arial: ["Arial"],
+    },
     container: {
       center: true,
       padding: "2rem",
@@ -16,6 +19,9 @@ module.exports = {
       },
     },
     extend: {
+      boxShadow: {
+        glow: "0px 0px 30px 0px #0ff",
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
