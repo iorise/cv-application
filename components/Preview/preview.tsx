@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { RefObject, useRef, useState } from "react";
 import { CVData, EducationType, ExperienceType, SkillType } from "@/types";
 import { Button } from "../ui/button";
 import { Separator } from "../ui/separator";
@@ -16,6 +16,8 @@ type PreviewProps = {
   experience: ExperienceType[];
   skills: SkillType[];
   togglePreview: () => void;
+  previewRef: RefObject<HTMLDivElement>;
+  handleGenerate: () => void;
 };
 
 const Preview = ({
@@ -24,9 +26,9 @@ const Preview = ({
   education,
   experience,
   skills,
-  togglePreview,
+  previewRef,
+  handleGenerate,
 }: PreviewProps) => {
-  const [isMobile] = useState(true);
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -37,6 +39,7 @@ const Preview = ({
       <div
         className="absolute md:static top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 md:translate-x-0 md:translate-y-0 right-0 bottom-0 max-w-[700px] w-[370px] h-[625px] md:w-[700px] xl:w-[700px] max-h-[920px] xl:h-[920px] md:h-[920px] bg-white text-black rounded-lg"
         id="preview"
+        ref={previewRef}
       >
         <InfoPrev info={info} />
         <div className="main text-white flex">
@@ -58,13 +61,6 @@ const Preview = ({
             </div>
           </div>
         </div>
-      </div>
-      <div className="w-full flex mt-28 md:mt-0 justify-center text-center mx-auto">
-        {isMobile && (
-          <Button className="md:hidden block absolute" onClick={togglePreview}>
-            Close
-          </Button>
-        )}
       </div>
     </motion.div>
   );

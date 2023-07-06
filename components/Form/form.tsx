@@ -36,6 +36,7 @@ type FormInputProps = {
   ) => void;
   handleAutoFill: () => void;
   togglePreview: () => void;
+  handleGenerate: () => void;
 };
 
 enum FormStep {
@@ -60,6 +61,7 @@ const FormInput = ({
   handleSkillChange,
   handleAutoFill,
   togglePreview,
+  handleGenerate,
 }: FormInputProps) => {
   const [activeStep, setActiveStep] = useState(FormStep.INFO);
 
@@ -238,7 +240,7 @@ const FormInput = ({
         {activeStep === FormStep.SKILLS ? (
           <Button
             className="w-24 h-10"
-            onClick={handleNext}
+            onClick={handleGenerate}
             variant={"default"}
             size={"lg"}
           >

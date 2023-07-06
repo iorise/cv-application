@@ -4,17 +4,32 @@ import Header from "@/components/Header";
 import FormInput from "@/components/Form/form";
 import Preview from "@/components/Preview/preview";
 import ModeToggle from "@/components/toggle-theme";
-import React, { useState, useEffect, useLayoutEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import type { CVData, EducationType, ExperienceType } from "@/types";
 import { DefaultData } from "@/lib/utils/default-data";
 import { ExampleData } from "@/lib/utils/example-data";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
+import html2canvas from "html2canvas";
 
 const Home = () => {
   const [cv, setCv] = useState<CVData>(DefaultData);
   const [isMobile, setIsMobile] = useState(false);
   const [previewVisible, setPreviewVisible] = useState(!isMobile);
+  const previewRef = useRef<HTMLDivElement | null>(null);
+
+  const handleGenerate = () => {
+    if (previewRef.current) {
+      const scale = 2;
+      html2canvas(previewRef.current, { scale: scale }).then((canvas) => {
+        const pngUrl = canvas.toDataURL("image/png");
+        const downloadLink = document.createElement("a");
+        downloadLink.href = pngUrl;
+        downloadLink.download = "cv.png";
+        downloadLink.click();
+      });
+    }
+  };
 
   const handleResize = () => {
     setIsMobile(window.innerWidth < 1024);
@@ -173,7 +188,7 @@ const Home = () => {
       <div className="hidden">
         <Header handleAutoFill={handleAutofill} />
       </div>
-      <div className="xl:flex justify-center items-center xl:gap-[100px] relative min-h-screen flex-grow-1">
+      <div className="flex justify-center items-center xl:gap-[100px] relative min-h-screen flex-grow-1">
         {/* <ModeToggle /> */}
 
         <div className="relative">
@@ -191,6 +206,7 @@ const Home = () => {
             addEducation={addEducation}
             handleAutoFill={handleAutofill}
             togglePreview={togglePreview}
+            handleGenerate={handleGenerate}
           />
         </div>
 
@@ -202,7 +218,12 @@ const Home = () => {
             experience={experience}
             skills={skills}
             togglePreview={togglePreview}
+            previewRef={previewRef}
+            handleGenerate={handleGenerate}
           />
+          <div className="absolute md:hidden left-1/2 bottom-0 max-sm:mb-20">
+            {isMobile && <Button onClick={togglePreview}>Close</Button>}
+          </div>
         </div>
       </div>
     </motion.div>
