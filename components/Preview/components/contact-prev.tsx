@@ -20,7 +20,7 @@ const ContactPrev = ({ contact }: ContactPrevProps) => {
           <p>{contact.email}</p>
         </div>
         <div className="flex gap-2 items-center">
-          <MapPin size={20} />
+          <MapPin size={18} />
           <p>{contact.address}</p>
         </div>
         <div className="flex gap-2 items-center">

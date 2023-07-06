@@ -14,7 +14,7 @@ const InfoPrev = ({ info }: InfoPrevProps) => {
           <h1 className="font-light">{info.lastName}</h1>
         </div>
       </div>
-      <div className="flex items-center text-center justify-center bg-gray-300 md:h-[50px] h-[20px] text-xs tracking">
+      <div className="flex items-center text-center justify-center bg-gray-300 md:h-[50px] h-[20px] md:text-base text-xxs tracking-widest capitalize">
         <p>{info.profession}</p>
       </div>
     </div>
