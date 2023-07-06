@@ -19,6 +19,14 @@ module.exports = {
       },
     },
     extend: {
+      letterSpacing: {
+        xwidest: "1rem",
+        "lg-widest": "0.5rem"
+      },
+      fontSize: {
+        "5xl": "50px",
+        xxs: "0.6rem",
+      },
       boxShadow: {
         glow: "0px 0px 30px 0px #0ff",
       },

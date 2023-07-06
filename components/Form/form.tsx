@@ -188,79 +188,74 @@ const FormInput = ({
   };
 
   return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 0.5 }}
-    >
-      <div className="flex flex-col gap-3">
-        <motion.div
-          key={activeStep}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.5 }}
-        >
+    <div className="flex flex-col gap-3">
+      <motion.div
+        key={activeStep}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 0.3 }}
+      >
+        <div className="flex items-center justify-center w-full h-[70vh] md:h-full">
           {getCurrentStepComponent()}
-        </motion.div>
-        <div className="flex justify-between">
-          {activeStep === FormStep.INFO ? (
-            <Button
-              className="w-24 h-10"
-              onClick={() => {
-                handleAutoFill();
-                handlePrev();
-              }}
-              variant={"default"}
-              size={"lg"}
-            >
-              {getButtonTextPrev(activeStep)}
-            </Button>
-          ) : (
-            <Button
-              className="w-24 h-10"
-              onClick={handlePrev}
-              variant={"secondary"}
-            >
-              {getButtonTextPrev(activeStep)}
-            </Button>
-          )}
-
-          <Button className="md:hidden block" onClick={togglePreview}>
-            Preview
-          </Button>
-          <Link
-            className="md:block hidden"
-            href="https://github.com/iorise"
-            target="_blank"
-          >
-            <Button className="bg-white hover:bg-white/90">
-              <AiFillGithub size={25} />
-            </Button>
-          </Link>
-          {activeStep === FormStep.SKILLS ? (
-            <Button
-              className="w-24 h-10"
-              onClick={handleNext}
-              variant={"default"}
-              size={"lg"}
-            >
-              {getButtonTextNext(activeStep)}
-            </Button>
-          ) : (
-            <Button
-              className="w-24 h-10"
-              onClick={handleNext}
-              variant={"secondary"}
-              size={"lg"}
-            >
-              {getButtonTextNext(activeStep)}
-            </Button>
-          )}
         </div>
+      </motion.div>
+      <div className="flex justify-between mx-5">
+        {activeStep === FormStep.INFO ? (
+          <Button
+            className="w-24 h-10"
+            onClick={() => {
+              handleAutoFill();
+              handlePrev();
+            }}
+            variant={"default"}
+            size={"lg"}
+          >
+            {getButtonTextPrev(activeStep)}
+          </Button>
+        ) : (
+          <Button
+            className="w-24 h-10"
+            onClick={handlePrev}
+            variant={"secondary"}
+          >
+            {getButtonTextPrev(activeStep)}
+          </Button>
+        )}
+
+        <Button className="md:hidden block" onClick={togglePreview}>
+          Preview
+        </Button>
+        <Link
+          className="md:block hidden"
+          href="https://github.com/iorise"
+          target="_blank"
+        >
+          <Button className="bg-white hover:bg-white/90">
+            <AiFillGithub size={25} />
+          </Button>
+        </Link>
+        {activeStep === FormStep.SKILLS ? (
+          <Button
+            className="w-24 h-10"
+            onClick={handleNext}
+            variant={"default"}
+            size={"lg"}
+          >
+            {getButtonTextNext(activeStep)}
+          </Button>
+        ) : (
+          <Button
+            className="w-24 h-10"
+            onClick={handleNext}
+            variant={"secondary"}
+            size={"lg"}
+          >
+            {getButtonTextNext(activeStep)}
+          </Button>
+        )}
       </div>
-    </motion.div>
+    </div>
   );
 };
 

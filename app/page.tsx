@@ -4,16 +4,33 @@ import Header from "@/components/Header";
 import FormInput from "@/components/Form/form";
 import Preview from "@/components/Preview/preview";
 import ModeToggle from "@/components/toggle-theme";
-import React, { useState } from "react";
+import React, { useState, useEffect, useLayoutEffect } from "react";
 import type { CVData, EducationType, ExperienceType } from "@/types";
 import { DefaultData } from "@/lib/utils/default-data";
 import { ExampleData } from "@/lib/utils/example-data";
+import { Button } from "@/components/ui/button";
+import { motion } from "framer-motion";
 
 const Home = () => {
   const [cv, setCv] = useState<CVData>(DefaultData);
+  const [isMobile, setIsMobile] = useState(false);
+  const [previewVisible, setPreviewVisible] = useState(!isMobile);
+
+  const handleResize = () => {
+    setIsMobile(window.innerWidth < 1024);
+  };
+
+  useEffect(() => {
+    handleResize();
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
   const { info, contact, education, experience, skills } = cv;
-
 
   const handleCvChange = (
     name: string,
@@ -134,35 +151,61 @@ const Home = () => {
   };
 
   const handleAutofill = () => {
-    const isAlreadyFilled = JSON.stringify(cv) === JSON.stringify(ExampleData)
+    const isAlreadyFilled = JSON.stringify(cv) === JSON.stringify(ExampleData);
 
     if (!isAlreadyFilled) {
-      setCv(ExampleData)
+      setCv(ExampleData);
     }
+  };
+
+  const togglePreview = () => {
+    setPreviewVisible(!previewVisible);
   };
 
   console.log(cv);
   return (
-    <div>
-      <ModeToggle />
-      <Header handleAutoFill={handleAutofill} />
-      <div className="flex">
-        <FormInput
-          onChange={handleCvChange}
-          info={info}
-          contact={contact}
-          education={education}
-          experience={experience}
-          itemSkill={skills}
-          addSkill={addSkill}
-          deleteSkill={deleteSkill}
-          handleSkillChange={handleSkillChange}
-          addExperience={addExperience}
-          addEducation={addEducation}
-        />
-        <Preview info={info} />
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.5 }}
+    >
+      <div className="hidden">
+        <Header handleAutoFill={handleAutofill} />
       </div>
-    </div>
+      <div className="xl:flex justify-center items-center xl:gap-[100px] relative min-h-screen flex-grow-1">
+        {/* <ModeToggle /> */}
+
+        <div className="relative">
+          <FormInput
+            onChange={handleCvChange}
+            info={info}
+            contact={contact}
+            education={education}
+            experience={experience}
+            itemSkill={skills}
+            addSkill={addSkill}
+            deleteSkill={deleteSkill}
+            handleSkillChange={handleSkillChange}
+            addExperience={addExperience}
+            addEducation={addEducation}
+            handleAutoFill={handleAutofill}
+            togglePreview={togglePreview}
+          />
+        </div>
+
+        <div className={`${previewVisible ? "" : "hidden"} `}>
+          <Preview
+            info={info}
+            contact={contact}
+            education={education}
+            experience={experience}
+            skills={skills}
+            togglePreview={togglePreview}
+          />
+        </div>
+      </div>
+    </motion.div>
   );
 };
 
