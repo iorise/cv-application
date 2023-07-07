@@ -176,8 +176,6 @@ const Home = () => {
   const togglePreview = () => {
     setPreviewVisible(!previewVisible);
   };
-
-  console.log(cv);
   return (
     <motion.div
       initial={{ opacity: 0 }}
